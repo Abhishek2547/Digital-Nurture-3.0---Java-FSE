@@ -1,0 +1,43 @@
+1. Understand Linked Lists
+Types of Linked Lists:
+
+Singly Linked List:
+
+Each node contains data and a reference to the next node in the sequence.
+Allows for efficient insertion and deletion operations.
+Traversing is only possible in one direction (from head to tail).
+Doubly Linked List:
+
+Each node contains data, a reference to the next node, and a reference to the previous node.
+Allows for efficient insertion and deletion operations in both directions.
+Traversing is possible in both forward and backward directions.
+Advantages of Linked Lists:
+
+Dynamic Size: Linked lists can easily grow and shrink in size, making them more flexible than arrays which have a fixed size.
+Efficient Insertions/Deletions: Insertions and deletions can be performed efficiently without resizing or shifting elements, as long as you have a reference to the correct node.
+
+2. Analysis
+Time Complexity Analysis:
+
+Add Operation:
+
+Average Case: O(n) (needs to traverse to the end of the list)
+Worst Case: O(n) (same reason as above)
+Search Operation:
+
+Best Case: O(1) (if the task is at the head)
+Average Case: O(n) (searching through the list)
+Worst Case: O(n) (if the task is at the end or not found)
+Traverse Operation:
+
+Time Complexity: O(n) (where n is the number of tasks)
+Delete Operation:
+
+Best Case: O(1) (if the task is at the head)
+Average Case: O(n) (needs to find the task and then update links)
+Worst Case: O(n) (same reason as above)
+Advantages of Linked Lists over Arrays:
+
+Dynamic Size: Linked lists can grow and shrink dynamically, unlike arrays which have a fixed size.
+Efficient Insertions/Deletions: Insertion and deletion operations are more efficient in linked lists as they do not require shifting elements like in arrays. You only need to update node references.
+No Wasted Space: Linked lists do not require allocating space for unused elements, which can save memory in cases where the number of elements varies significantly.

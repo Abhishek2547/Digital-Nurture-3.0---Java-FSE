@@ -1,0 +1,48 @@
+1. Understand Sorting Algorithms
+Bubble Sort:
+
+Description: Bubble Sort repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted.
+Time Complexity:
+Best Case: O(n) (when the list is already sorted, with an optimized version)
+Average Case: O(n^2)
+Worst Case: O(n^2)
+Insertion Sort:
+
+Description: Insertion Sort builds the final sorted array one item at a time. It picks elements from the unsorted part and places them in the correct position in the sorted part.
+Time Complexity:
+Best Case: O(n) (when the list is already sorted)
+Average Case: O(n^2)
+Worst Case: O(n^2)
+Quick Sort:
+
+Description: Quick Sort selects a 'pivot' element and partitions the array into elements less than the pivot and elements greater than the pivot. It then recursively sorts the partitions.
+Time Complexity:
+Best Case: O(n log n)
+Average Case: O(n log n)
+Worst Case: O(n^2) (when the smallest or largest element is always chosen as the pivot)
+Merge Sort:
+
+Description: Merge Sort divides the array into two halves, recursively sorts each half, and then merges the sorted halves to produce a sorted array.
+Time Complexity:
+Best Case: O(n log n)
+Average Case: O(n log n)
+Worst Case: O(n log n)
+
+2. Analysis
+Time Complexity Comparison:
+
+Bubble Sort:
+
+Best Case: O(n) (optimized version, if no swaps are needed)
+Average Case: O(n^2)
+Worst Case: O(n^2)
+Quick Sort:
+
+Best Case: O(n log n)
+Average Case: O(n log n)
+Worst Case: O(n^2) (can be mitigated with good pivot selection strategies)
+Why Quick Sort is Preferred:
+
+Efficiency: Quick Sort generally has better average-case performance (O(n log n)) compared to Bubble Sort’s O(n^2).
+Scalability: Quick Sort handles larger datasets more efficiently due to its divide-and-conquer approach.
+Optimization: Quick Sort can be optimized with better pivot selection methods, such as median-of-three or random pivoting.

@@ -1,0 +1,47 @@
+1. Understand Array Representation
+Array Representation in Memory:
+
+Contiguous Memory Allocation: Arrays are stored in contiguous memory locations. This means that elements are stored sequentially in memory, allowing for efficient indexing.
+
+Fixed Size: The size of an array is fixed upon creation. You need to specify the number of elements it can hold, and it cannot be changed later.
+
+Indexing: Arrays use zero-based indexing, which means the first element is at index 0, the second element is at index 1, and so on.
+
+Advantages of Arrays:
+
+Direct Access: Arrays allow constant-time access (O(1)) to elements using their index. This is due to their contiguous memory allocation.
+
+Simplicity: Arrays are straightforward to implement and use. They are the simplest data structure for storing and accessing a collection of elements.
+
+Performance: Due to contiguous memory allocation, arrays often have better cache performance compared to other data structures.
+
+2. Analysis
+Time Complexity Analysis:
+
+Add Operation:
+
+Average Case: O(1) (if there is space in the array)
+Worst Case: O(1) (as long as there is no need to resize the array)
+Search Operation:
+
+Best Case: O(1) (if the employee is found at the first position)
+Average Case: O(n) (on average, half of the array needs to be checked)
+Worst Case: O(n) (if the employee is at the end or not found)
+Traverse Operation:
+
+Time Complexity: O(n) (where n is the number of employees)
+Delete Operation:
+
+Best Case: O(n) (if the employee is found at the end)
+Worst Case: O(n) (requires shifting elements to the left)
+Limitations of Arrays:
+
+Fixed Size: Arrays have a fixed size, which means you need to allocate space upfront. This can lead to wasted memory if the array is too large or insufficient space if the array is too small.
+
+Insertion and Deletion: Adding or removing elements is inefficient since it requires shifting elements to maintain contiguous memory.
+
+When to Use Arrays:
+
+When the number of elements is known and fixed.
+When you need fast access to elements using indices.
+For small or fixed-size datasets where dynamic resizing is not a concern.

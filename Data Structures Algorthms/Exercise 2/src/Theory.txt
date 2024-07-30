@@ -1,0 +1,32 @@
+1. Understand Asymptotic Notation
+Big O Notation:
+
+Big O notation is used to describe the time complexity of an algorithm, which helps in understanding its performance and efficiency. It provides an upper bound on the time required as a function of the input size.
+
+O(1): Constant time - The time required does not change with the size of the input.
+O(n): Linear time - The time required grows linearly with the input size.
+O(log n): Logarithmic time - The time required grows logarithmically with the input size.
+O(n^2): Quadratic time - The time required grows quadratically with the input size.
+Search Operation Scenarios:
+
+Best Case: The search algorithm finds the target element at the first position (for linear search) or the middle of the array (for binary search).
+Average Case: The search algorithm requires a middle-ground number of comparisons to find the target element.
+Worst Case: The search algorithm requires the maximum number of comparisons, such as scanning the entire array (for linear search) or going through all levels of recursion (for binary search).
+
+2. Analysis
+Time Complexity Comparison:
+
+Linear Search:
+
+Best Case: O(1) - The element is at the first position.
+Average Case: O(n) - On average, half of the array needs to be checked.
+Worst Case: O(n) - The element is at the last position or not in the array.
+Binary Search:
+
+Best Case: O(1) - The element is at the middle of the array.
+Average Case: O(log n) - The search space is halved with each step.
+Worst Case: O(log n) - The search space is halved repeatedly until the element is found or the search space is exhausted.
+Which Algorithm is More Suitable:
+
+Binary Search is more suitable for searching in large datasets, given that the array is sorted. It provides faster search times (O(log n)) compared to linear search (O(n)).
+Linear Search is simpler and does not require sorting. It is useful for small or unsorted datasets, or when you need to search for an element in a list without prior sorting.

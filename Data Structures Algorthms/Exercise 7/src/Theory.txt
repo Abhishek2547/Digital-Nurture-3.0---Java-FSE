@@ -1,0 +1,28 @@
+1. Understand Recursive Algorithms
+Concept of Recursion:
+
+Definition: Recursion is a method where a function calls itself to solve smaller instances of the same problem. A recursive function typically has two parts:
+Base Case: The simplest instance of the problem that can be solved directly without recursion.
+Recursive Case: The part of the function where it calls itself with modified parameters to move towards the base case.
+Advantages:
+
+Simplicity: Recursive solutions can be more straightforward and easier to understand, especially for problems that can naturally be divided into similar sub-problems (e.g., calculating factorials, Fibonacci series).
+Disadvantages:
+
+Overhead: Recursive calls consume stack space and can lead to high memory usage.
+Redundant Calculations: Without optimization, recursive algorithms can perform redundant calculations.
+
+2. Analysis
+Time Complexity:
+
+The time complexity of the recursive method is O(n), where n is the number of periods. This is because the function makes one recursive call per period.
+Optimization:
+
+To optimize the recursive solution and avoid excessive computation, you can use memoization or convert the recursion into an iterative solution.
+
+1. Memoization: Cache results of previous calculations to avoid redundant computations.
+
+Advantages of Iterative Approach:
+
+Efficiency: The iterative approach generally has lower overhead and does not risk stack overflow errors as recursion does.
+Better Performance: Iterative solutions often perform better with large inputs due to less overhead compared to recursion.
