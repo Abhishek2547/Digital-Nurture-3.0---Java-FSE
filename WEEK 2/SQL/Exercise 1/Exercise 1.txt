@@ -1,0 +1,80 @@
+Scenario 1: Discount on Loan Interest Rates for Customers Above 60
+
+DECLARE
+    v_age NUMBER;
+    v_dob DATE;
+    v_interest_rate NUMBER;
+    CURSOR c_customers IS
+        SELECT CustomerID, DOB FROM Customers;
+BEGIN
+    FOR customer_rec IN c_customers LOOP
+        v_dob := customer_rec.DOB;
+        
+        -- Calculate age based on DOB
+        v_age := EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM v_dob);
+
+        IF v_age > 60 THEN
+            -- Update loan interest rate for customers above 60
+            FOR loan_rec IN (SELECT LoanID, InterestRate FROM Loans WHERE CustomerID = customer_rec.CustomerID) LOOP
+                v_interest_rate := loan_rec.InterestRate;
+                
+                -- Apply 1% discount
+                v_interest_rate := v_interest_rate - 1;
+
+                -- Update the loan record with the new interest rate
+                UPDATE Loans
+                SET InterestRate = v_interest_rate
+                WHERE LoanID = loan_rec.LoanID;
+            END LOOP;
+        END IF;
+    END LOOP;
+
+    COMMIT;
+END;
+
+Scenario 2: Promote Customer to VIP Status Based on Balance
+
+BEGIN
+    FOR customer_rec IN (SELECT CustomerID, Balance FROM Customers) LOOP
+        IF customer_rec.Balance > 10000 THEN
+            -- Update IsVIP status for customers with balance over $10,000
+            UPDATE Customers
+            SET IsVIP = 'TRUE'
+            WHERE CustomerID = customer_rec.CustomerID;
+        ELSE
+            -- Ensure others are marked as not VIP
+            UPDATE Customers
+            SET IsVIP = 'FALSE'
+            WHERE CustomerID = customer_rec.CustomerID;
+        END IF;
+    END LOOP;
+
+    COMMIT;
+END;
+
+Scenario 3: Send Reminders for Loans Due in Next 30 Days
+
+DECLARE
+    v_due_date DATE;
+    v_customer_name VARCHAR2(100);
+    v_loan_id NUMBER;
+    CURSOR c_loans IS
+        SELECT LoanID, CustomerID, EndDate
+        FROM Loans
+        WHERE EndDate BETWEEN SYSDATE AND SYSDATE + 30;
+BEGIN
+    FOR loan_rec IN c_loans LOOP
+        v_due_date := loan_rec.EndDate;
+        v_loan_id := loan_rec.LoanID;
+
+        -- Fetch customer name
+        SELECT Name INTO v_customer_name
+        FROM Customers
+        WHERE CustomerID = loan_rec.CustomerID;
+
+        -- Print reminder message
+        DBMS_OUTPUT.PUT_LINE('Reminder: Customer ' || v_customer_name || 
+                             ', your loan with Loan ID ' || v_loan_id || 
+                             ' is due on ' || TO_CHAR(v_due_date, 'YYYY-MM-DD'));
+    END LOOP;
+END;

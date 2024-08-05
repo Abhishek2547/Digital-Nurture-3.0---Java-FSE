@@ -1,0 +1,61 @@
+Scenario 1: Calculate Age of Customers
+
+CREATE OR REPLACE FUNCTION CalculateAge(
+    p_dob DATE
+) RETURN NUMBER IS
+    v_age NUMBER;
+BEGIN
+    -- Calculate age as the difference in years between the current date and DOB
+    v_age := EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM p_dob);
+
+    -- Adjust if the current date is before the birthday this year
+    IF TO_CHAR(SYSDATE, 'MMDD') < TO_CHAR(p_dob, 'MMDD') THEN
+        v_age := v_age - 1;
+    END IF;
+
+    RETURN v_age;
+END CalculateAge;
+
+
+Scenario 2: Compute Monthly Installment for a Loan
+
+CREATE OR REPLACE FUNCTION CalculateMonthlyInstallment(
+    p_loan_amount NUMBER,
+    p_interest_rate NUMBER,
+    p_duration_years NUMBER
+) RETURN NUMBER IS
+    v_monthly_rate NUMBER;
+    v_months NUMBER;
+    v_monthly_installment NUMBER;
+BEGIN
+    -- Convert annual interest rate to a monthly rate
+    v_monthly_rate := p_interest_rate / 100 / 12;
+
+    -- Calculate total number of months
+    v_months := p_duration_years * 12;
+
+    -- Calculate monthly installment using the formula for annuity
+    v_monthly_installment := p_loan_amount * (v_monthly_rate / (1 - POWER(1 + v_monthly_rate, -v_months)));
+
+    RETURN v_monthly_installment;
+END CalculateMonthlyInstallment;
+
+
+Scenario 3: Check if Customer Has Sufficient Balance
+
+CREATE OR REPLACE FUNCTION HasSufficientBalance(
+    p_account_id NUMBER,
+    p_amount NUMBER
+) RETURN BOOLEAN IS
+    v_balance NUMBER;
+BEGIN
+    -- Retrieve the account balance
+    SELECT Balance INTO v_balance FROM Accounts
+    WHERE AccountID = p_account_id;
+
+    -- Check if the balance is sufficient
+    RETURN v_balance >= p_amount;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN FALSE;
+END HasSufficientBalance;
