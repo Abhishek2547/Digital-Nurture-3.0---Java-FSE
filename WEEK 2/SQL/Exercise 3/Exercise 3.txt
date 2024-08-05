@@ -1,0 +1,73 @@
+Scenario 1: Process Monthly Interest for Savings Accounts
+
+CREATE OR REPLACE PROCEDURE ProcessMonthlyInterest AS
+    v_interest_rate CONSTANT NUMBER := 0.01;
+BEGIN
+    -- Update all savings accounts by applying the interest rate
+    UPDATE Accounts
+    SET Balance = Balance + (Balance * v_interest_rate)
+    WHERE AccountType = 'Savings';
+
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE('Monthly interest processed for all savings accounts.');
+END ProcessMonthlyInterest;
+
+
+Scenario 2: Update Employee Bonus Based on Performance
+
+CREATE OR REPLACE PROCEDURE UpdateEmployeeBonus(
+    p_department VARCHAR2,
+    p_bonus_percentage NUMBER
+) AS
+BEGIN
+    -- Update the salary by adding the bonus percentage
+    UPDATE Employees
+    SET Salary = Salary + (Salary * p_bonus_percentage / 100)
+    WHERE Department = p_department;
+
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE('Bonus applied to all employees in department: ' || p_department);
+END UpdateEmployeeBonus;
+
+
+Scenario 3: Transfer Funds Between Customer Accounts
+
+CREATE OR REPLACE PROCEDURE TransferFunds(
+    p_from_account_id NUMBER,
+    p_to_account_id NUMBER,
+    p_amount NUMBER
+) AS
+    v_from_balance NUMBER;
+BEGIN
+    -- Check balance of the source account
+    SELECT Balance INTO v_from_balance FROM Accounts
+    WHERE AccountID = p_from_account_id FOR UPDATE;
+
+    -- Ensure sufficient balance
+    IF v_from_balance < p_amount THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Insufficient funds in the source account.');
+    END IF;
+
+    -- Deduct from the source account
+    UPDATE Accounts
+    SET Balance = Balance - p_amount
+    WHERE AccountID = p_from_account_id;
+
+    -- Add to the destination account
+    UPDATE Accounts
+    SET Balance = Balance + p_amount
+    WHERE AccountID = p_to_account_id;
+
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE('Transfer completed successfully.');
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        ROLLBACK;
+        DBMS_OUTPUT.PUT_LINE('Account not found. Transfer aborted.');
+    WHEN OTHERS THEN
+        ROLLBACK;
+        DBMS_OUTPUT.PUT_LINE('An error occurred during the transfer: ' || SQLERRM);
+END TransferFunds;
